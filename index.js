@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
-const PrivateConst = require('./private/const.js');
+const { prefix, token} = require('./config.json');
 const JDR = require('./jdr');
 
 // Connection du bot
 const bot = new Discord.Client();
-bot.login(PrivateConst.key);
+bot.login(token);
 // node index.js pour lancer
 
 //*****************************************//
@@ -18,8 +18,8 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
 //*************Gestion message*************//
 //****************************************//
 bot.on('message', function(message){
-    if(message.content === '!ping') {
-        message.reply('pong')
+    if(message.content === `${prefix}ping`) {
+        message.reply('pong');
     }
     if(diceRegExp.test(message.content)){
         let param = message.content.split('d');

@@ -14,9 +14,12 @@ Dans le dossier racine du projet :
 npm install
 ```
 ### **liaison du bot**
-Dans `./private/const.js` :
-```JavaScript
-exports.key = 'YOUR_BOT_TOKEN'
+Dans `config.json` :
+```json
+{
+    "prefix": "Your_prefix_command",
+    "token":  "Your_token_bot"
+}
 ```
 
 ## Usage

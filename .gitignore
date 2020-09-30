@@ -1,5 +1,5 @@
 # dossier contenant les clés privés
 private/
-
+config.json
 # dossier de module
 node_modules/
