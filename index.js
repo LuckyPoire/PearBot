@@ -1,9 +1,14 @@
 const Discord = require('discord.js');
 const { prefix, token} = require('./config.json');
+const Words = require('an-array-of-french-words')
 const JDR = require('./jdr');
 
 // Connection du bot
+
 const bot = new Discord.Client();
+bot.once('ready', () => {
+	console.log(Words.length);
+});
 bot.login(token);
 // node index.js pour lancer
 
