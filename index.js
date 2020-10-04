@@ -1,16 +1,15 @@
 const Discord = require('discord.js');
 const { prefix, token} = require('./config.json');
-const Words = require('an-array-of-french-words')
+const GoD = require('./droateGoche')
 const JDR = require('./jdr');
 
 // Connection du bot
 
 const bot = new Discord.Client();
 bot.once('ready', () => {
-	console.log(Words.length);
+
 });
 bot.login(token);
-// node index.js pour lancer
 
 //*****************************************//
 //**************Constante*****************//
@@ -31,5 +30,8 @@ bot.on('message', function(message){
         let res = JDR.dice(param[0],param[1]);
         let mess = "Lancer : " + res + "\n Résultat : " + res.reduce(reducer);
         message.reply(mess)
+    }
+    if(message.content === `${prefix}GoD`){
+        GoD.gocheOuDroate(message);
     }
 });
