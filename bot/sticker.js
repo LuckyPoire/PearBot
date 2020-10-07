@@ -34,7 +34,6 @@ exports.addSticker = async (msg, args) => {
 			if (e.name === 'SequelizeUniqueConstraintError') {
 				return msg.reply('ce nom est déja utilisé.');
 			}
-			console.log(e)
 			return msg.reply(`quelque'chose ne vas pas avec ce nom.`);
 		}
 	}else{

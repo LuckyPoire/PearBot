@@ -2,13 +2,13 @@ const fs = require('fs')
 const Discord = require('discord.js');
 const { prefix, token} = require('./config.json');
 
-const BDD = require('./baseDeDonee');
+const sticker = require('./bot/sticker');
 
 // Connection du bot
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.once('ready', () => {
-    BDD.initDB();
+    sticker.initDB();
     console.log('ready');
 });
 client.login(token);
@@ -27,9 +27,7 @@ client.on('message', function(message){
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
-    console.log(args);
     const command = args.shift().toLowerCase();
-    console.log(command);
  
     if (!client.commands.has(command)) return;
 
