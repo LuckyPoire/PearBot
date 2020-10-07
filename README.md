@@ -28,3 +28,29 @@ Dans le dossier contenant `index.js`
 ```bash
 node index.js
 ```
+
+## Commande
+
+**Fonction goche ou droate**
+```
+!god
+```
+
+**Fonction sticker**
+
+Ajouter un sticker:
+```
+!sticker 'nomDuSticker' 'lienDuSticker'
+````
+Afficher un sticker
+```
+!s 'nomDuSticker'
+```
+Liste des stickers
+```
+!listStick
+```
+Supprimer un sticker
+```
+!delStick *nomDuSticker*
+```

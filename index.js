@@ -1,37 +1,41 @@
+const fs = require('fs')
 const Discord = require('discord.js');
 const { prefix, token} = require('./config.json');
-const GoD = require('./droateGoche')
-const JDR = require('./jdr');
+
+const BDD = require('./baseDeDonee');
 
 // Connection du bot
-
-const bot = new Discord.Client();
-bot.once('ready', () => {
-
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+client.once('ready', () => {
+    BDD.initDB();
+    console.log('ready');
 });
-bot.login(token);
+client.login(token);
 
-//*****************************************//
-//**************Constante*****************//
-//*****************************************//
-const diceRegExp = /^[1-9][0-9]*d[1-9][0-9]*$/
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}
 
 //*****************************************//
 //*************Gestion message*************//
 //****************************************//
-bot.on('message', function(message){
-    if(message.content === `${prefix}ping`) {
-        message.reply('pong');
-    }
-    if(diceRegExp.test(message.content)){
-        let param = message.content.split('d');
-        let res = JDR.dice(param[0],param[1]);
-        let mess = "Lancer : " + res + "\n Résultat : " + res.reduce(reducer);
-        message.reply(mess)
-    }
-    if(message.content === `${prefix}GoD`){
-        GoD.gocheOuDroate(message);
+client.on('message', function(message){
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    console.log(args);
+    const command = args.shift().toLowerCase();
+    console.log(command);
+ 
+    if (!client.commands.has(command)) return;
+
+    try {
+        client.commands.get(command).execute(message, args);
+    } catch (error) {
+        message.reply('there was an error trying to execute that command!');
     }
 });
