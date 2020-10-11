@@ -27,6 +27,4 @@ exports.gocheOuDroate = async (message, args) => {
             sentMess.react('🇩')
         });
     }
-    
-    
 }
