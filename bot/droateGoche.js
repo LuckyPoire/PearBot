@@ -20,8 +20,12 @@ exports.gocheOuDroate = async (message, args) => {
             sentMess.react('🇬')
             sentMess.react('🇩')
         })
-    }else{
-        message.reply(`la syntaxe n'est pas bonne ! \n !god`);
+    }else if(args.length == 1){
+        let mess = "C'est de gauche ou de droite? \n\n" + args[0]
+        message.channel.send(mess).then(sentMess => { //Pour ajouter les réaction G et D au message du bot
+            sentMess.react('🇬')
+            sentMess.react('🇩')
+        });
     }
     
     
